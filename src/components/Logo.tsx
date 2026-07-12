@@ -23,17 +23,7 @@ export const AuditRaxLogo: React.FC<LogoProps> = ({
         referrerPolicy="no-referrer"
       />
 
-      {/* Wordmark Text */}
-      {!iconOnly && (
-        <span className="flex items-baseline font-sans text-2xl font-black tracking-tight">
-          <span className={isDark ? 'text-white' : 'text-gray-900'}>
-            Audit
-          </span>
-          <span className="text-cyan-500">
-            Rax
-          </span>
-        </span>
-      )}
+
     </div>
   );
 };
