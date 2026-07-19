@@ -407,96 +407,19 @@ export default function App() {
             </motion.div>
 
             {/* Right Dashboard Mockup */}
-            <motion.div 
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.8, ease: "easeOut", delay: 0.15 }}
-              className="lg:col-span-6"
-            >
-              <div className="relative bg-white rounded-2xl shadow-2xl border border-gray-100 p-4 sm:p-5 flex transform hover:scale-[1.01] transition-all duration-300">
-                
-                {/* Left Mini Sidebar */}
-                <div className="w-1/4 border-r border-gray-100 pr-4 hidden sm:block">
-                  <div className="flex items-center gap-1.5 mb-8 mt-2">
-                    <div className="w-5 h-5 bg-gray-900 rounded-lg flex items-center justify-center font-black text-[10px] text-cyan-400">A</div>
-                    <span className="text-xs font-black text-gray-800">AuditRax</span>
-                  </div>
-                  <ul className="space-y-3 text-[11px] text-gray-400 font-semibold">
-                    <li className="flex items-center gap-2 text-cyan-600 bg-cyan-50 p-2 rounded cursor-pointer"><TrendingUp className="w-3 h-3" /> Overview</li>
-                    <li className="flex items-center gap-2 p-2 hover:bg-gray-50 hover:text-gray-700 rounded cursor-pointer transition">📄 Reconciliation</li>
-                    <li className="flex items-center gap-2 p-2 hover:bg-gray-50 hover:text-gray-700 rounded cursor-pointer transition">⚖️ Disputes</li>
-                    <li className="flex items-center gap-2 p-2 hover:bg-gray-50 hover:text-gray-700 rounded cursor-pointer transition">📦 Shipments</li>
-                    <li className="flex items-center gap-2 p-2 hover:bg-gray-50 hover:text-gray-700 rounded cursor-pointer transition">💳 Payments</li>
-                    <li className="flex items-center gap-2 p-2 hover:bg-gray-50 hover:text-gray-700 rounded cursor-pointer transition">📊 Analytics</li>
-                  </ul>
-                </div>
-                
-                {/* Right Mini Content */}
-                <div className="w-full sm:w-3/4 pl-0 sm:pl-4 pt-2">
-                  <div className="flex justify-between items-center mb-4">
-                    <h3 className="font-bold text-sm text-gray-900">Audit Analytics</h3>
-                    <span className="text-[10px] bg-gray-50 border border-gray-200 px-2.5 py-1 rounded-lg text-gray-500 font-semibold flex items-center gap-1">📅 May 1 - May 31</span>
-                  </div>
-                  
-                  {/* Dashboard stats */}
-                  <div className="grid grid-cols-2 gap-2 mb-4">
-                    <div className="border border-gray-100 rounded-xl p-2.5 bg-gray-50/50 hover:bg-white hover:shadow-md transition">
-                      <p className="text-[9px] text-gray-400 font-semibold uppercase tracking-wider">Recovered Revenue</p>
-                      <p className="font-extrabold text-sm text-gray-800 mt-0.5">₹12,45,320</p>
-                      <p className="text-[9px] text-green-500 font-bold flex items-center mt-0.5">↑ 18.6%</p>
-                    </div>
-                    <div className="border border-gray-100 rounded-xl p-2.5 bg-gray-50/50 hover:bg-white hover:shadow-md transition">
-                      <p className="text-[9px] text-gray-400 font-semibold uppercase tracking-wider">Disputes Won</p>
-                      <p className="font-extrabold text-sm text-gray-800 mt-0.5">1,248</p>
-                      <p className="text-[9px] text-green-500 font-bold flex items-center mt-0.5">↑ 24.2%</p>
-                    </div>
-                  </div>
-                  
-                  {/* Custom SVG Line Chart */}
-                  <div className="border border-gray-100 rounded-xl p-3 bg-white shadow-sm mb-4">
-                    <h4 className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-2">Recovered Revenue Trend</h4>
-                    <div className="h-28 w-full relative flex items-end">
-                      <svg viewBox="0 0 300 100" className="w-full h-full">
-                        <defs>
-                          <linearGradient id="chartGradient" x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="0%" stopColor="#06b6d4" stopOpacity="0.3"/>
-                            <stop offset="100%" stopColor="#06b6d4" stopOpacity="0"/>
-                          </linearGradient>
-                        </defs>
-                        {/* Grid lines */}
-                        <line x1="0" y1="20" x2="300" y2="20" stroke="#f1f5f9" strokeWidth="1" />
-                        <line x1="0" y1="50" x2="300" y2="50" stroke="#f1f5f9" strokeWidth="1" />
-                        <line x1="0" y1="80" x2="300" y2="80" stroke="#f1f5f9" strokeWidth="1" />
-                        
-                        {/* Area under curve */}
-                        <path d="M 0 90 L 30 75 L 100 80 L 170 45 L 240 55 L 300 10 L 300 100 L 0 100 Z" fill="url(#chartGradient)" />
-                        
-                        {/* Line */}
-                        <path d="M 0 90 L 30 75 L 100 80 L 170 45 L 240 55 L 300 10" fill="none" stroke="#06b6d4" strokeWidth="2" strokeLinecap="round" />
-                        
-                        {/* Target dots */}
-                        <circle cx="300" cy="10" r="3.5" fill="#06b6d4" stroke="#ffffff" strokeWidth="1.5" />
-                        <circle cx="170" cy="45" r="3.5" fill="#06b6d4" stroke="#ffffff" strokeWidth="1.5" />
-                      </svg>
-                    </div>
-                  </div>
-
-                  {/* Micro alerts */}
-                  <div className="space-y-1.5">
-                    <div className="flex justify-between items-center text-[10px] p-2 rounded-lg bg-red-50 border border-red-100/50">
-                      <div>
-                        <span className="text-red-500 font-bold mr-1">●</span>
-                        <span className="font-semibold text-gray-700">Delhivery Settlement Mismatch</span>
-                      </div>
-                      <span className="font-bold text-red-700">₹7,300</span>
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-            </motion.div>
-
+<motion.div
+  initial={{ opacity: 0, x: 30 }}
+  whileInView={{ opacity: 1, x: 0 }}
+  viewport={{ once: true }}
+  transition={{ duration: 0.8, delay: 0.2 }}
+  className="lg:col-span-6"
+>
+  <img
+    src="/dashboard-preview.png"
+    alt="AuditRax Dashboard"
+    className="w-full rounded-[28px] shadow-[0_35px_80px_rgba(0,0,0,0.12)] border border-gray-200"
+  />
+</motion.div>
           </div>
         </div>
       </section>
