@@ -922,7 +922,11 @@ export default function App() {
             {/* Logo, Bio */}
             <div className="md:col-span-5 space-y-4">
               <div className="flex items-center cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
-                <AuditRaxLogo theme="dark" />
+              <img
+    src="/footer-logo.png"
+    alt="AuditRax"
+    className="h-12 w-auto"
+/>
               </div>
               <p className="text-sm text-gray-400 max-w-sm leading-relaxed">
                 The premier automated intelligence ledger system checking leaks for massive ecommerce platforms.
