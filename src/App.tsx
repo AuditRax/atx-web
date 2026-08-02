@@ -304,6 +304,9 @@ export default function App() {
               <button onClick={() => scrollToContact()} className="bg-gray-900 hover:bg-gray-800 text-white px-5 py-2.5 rounded-xl text-sm font-semibold transition shadow-lg hover:shadow-cyan-500/10 border border-gray-800">
                 Book Enterprise Demo
               </button>
+              <a href="https://zohfy.in/auditrax/login" className="bg-gray-900 hover:bg-gray-800 text-white px-5 py-2.5 rounded-xl text-sm font-semibold transition shadow-lg hover:shadow-cyan-500/10 border border-gray-800 inline-block text-center">
+                Login
+              </a>
             </div>
 
             {/* Mobile Hamburger Button */}
@@ -338,6 +341,9 @@ export default function App() {
                 <button onClick={() => { setMobileMenuOpen(false); scrollToContact(); }} className="w-full bg-gray-900 text-white text-center py-3 rounded-lg font-bold shadow-md">
                   Book Enterprise Demo
                 </button>
+                <a href="https://zohfy.in/auditrax/login" className="block w-full bg-gray-900 text-white text-center py-3 rounded-lg font-bold shadow-md">
+                  Login
+                </a>
               </div>
             </motion.div>
           )}
@@ -949,7 +955,7 @@ export default function App() {
               <h5 className="text-white text-xs font-bold uppercase tracking-widest">Contact Us</h5>
               <ul className="space-y-3 text-sm text-gray-400">
                 <li className="leading-relaxed">📍 Coimbatore, Tamil Nadu, India</li>
-                <li>✉️ <a href="mailto:info@auditrax.in" className="hover:text-white transition">info@auditrax.in</a></li>
+                <li>✉️ <a href="mailto:connect@auditrax.in" className="hover:text-white transition">connect@auditrax.in</a></li>
                 <li>📞 +91 9082348560</li>
               </ul>
               
