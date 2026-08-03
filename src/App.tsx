@@ -114,16 +114,10 @@ export default function App() {
       }
     } else if (name === 'email') {
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      const forbiddenDomains = ['gmail.com', 'icloud.com', 'outlook.com', 'yahoo.com', 'hotmail.com', 'live.com', 'aol.com', 'zoho.com'];
       if (!value) {
-        error = 'Business email address is required.';
+        error = 'Email address is required.';
       } else if (!emailRegex.test(value)) {
         error = 'Please enter a valid email structure.';
-      } else {
-        const domain = value.split('@')[1]?.toLowerCase();
-        if (forbiddenDomains.includes(domain)) {
-          error = 'Please use your company domain email. Free email providers are restricted.';
-        }
       }
     }
     setFormErrors(prev => ({ ...prev, [name]: error }));
@@ -170,7 +164,10 @@ export default function App() {
       if (response.ok) {
         setSubmitSuccess(true);
         setLastEmailStatus(resData.emailStatus);
-        setFormData({ name: '', mobile: '', email: '', message: '' });
+        setTimeout(() => {
+          setSubmitSuccess(false);
+          setFormData({ name: '', mobile: '', email: '', message: '' });
+        }, 5000);
       } else {
         alert(resData.error || 'Something went wrong. Please check your form fields.');
       }
@@ -835,10 +832,9 @@ export default function App() {
           <div className="md:col-span-3 bg-gray-50 border border-gray-100 p-5 sm:p-6 md:p-8 rounded-2xl">
             {submitSuccess && (
               <div className="bg-emerald-50 border border-emerald-200 text-emerald-800 p-4 rounded-xl text-xs mb-5 space-y-1">
-                <p className="font-bold">🎉 Request Received Successfully!</p>
+                <p className="font-bold">🎉 The request has been received!</p>
                 <p className="text-emerald-700 font-medium leading-relaxed">
-                  Our enterprise onboarding engineer will contact your corporate domain address shortly. 
-                  {lastEmailStatus === 'simulated_success' && ' (Submissions logged safely in leads file)'}
+                  Our representative will connect shortly.
                 </p>
               </div>
             )}

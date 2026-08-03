@@ -3,6 +3,9 @@ import react from '@vitejs/plugin-react';
 import path from 'path';
 import {defineConfig} from 'vite';
 import apiApp from './src/api';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 export default defineConfig(() => {
   return {
