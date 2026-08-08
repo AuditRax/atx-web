@@ -301,7 +301,7 @@ export default function App() {
               <button onClick={() => scrollToContact()} className="bg-gray-900 hover:bg-gray-800 text-white px-5 py-2.5 rounded-xl text-sm font-semibold transition shadow-lg hover:shadow-cyan-500/10 border border-gray-800">
                 Book Enterprise Demo
               </button>
-              <a href="https://zohfy.in/auditrax/login" className="bg-gray-900 hover:bg-gray-800 text-white px-5 py-2.5 rounded-xl text-sm font-semibold transition shadow-lg hover:shadow-cyan-500/10 border border-gray-800 inline-block text-center">
+              <a href="https://app.auditrax.in" className="bg-gray-900 hover:bg-gray-800 text-white px-5 py-2.5 rounded-xl text-sm font-semibold transition shadow-lg hover:shadow-cyan-500/10 border border-gray-800 inline-block text-center">
                 Login
               </a>
             </div>
@@ -338,7 +338,7 @@ export default function App() {
                 <button onClick={() => { setMobileMenuOpen(false); scrollToContact(); }} className="w-full bg-gray-900 text-white text-center py-3 rounded-lg font-bold shadow-md">
                   Book Enterprise Demo
                 </button>
-                <a href="https://zohfy.in/auditrax/login" className="block w-full bg-gray-900 text-white text-center py-3 rounded-lg font-bold shadow-md">
+                <a href="https://app.auditrax.in" className="block w-full bg-gray-900 text-white text-center py-3 rounded-lg font-bold shadow-md">
                   Login
                 </a>
               </div>
