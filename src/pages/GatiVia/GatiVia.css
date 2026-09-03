@@ -1,0 +1,614 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap');
+
+#gativia-console {
+  /* ============================================================
+     TOKENS
+     ============================================================ */
+  --forest:#0a4f40;
+  --forest-deep:#063a2f;
+  --slate:#111827;
+  --body:#41504b;
+  --muted:#77837f;
+  --faint:#9aa5a1;
+
+  --paper:#ffffff;
+  --mist:#fafafa;
+  --stone:#f4f5f4;
+  --mint:#eff5f2;
+  --hair:#e8ebe9;
+
+  --code-bg:#0d1614;
+  --code-text:#c9d6d1;
+
+  --shadow-soft:0 1px 2px rgba(17,24,39,.03), 0 12px 30px -16px rgba(17,24,39,.14);
+  --shadow-lift:0 2px 6px rgba(17,24,39,.04), 0 28px 60px -28px rgba(10,79,64,.28);
+
+  --page:1180px;
+  --gutter:40px;
+
+  background:var(--paper);
+  color:var(--body);
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  font-size:16px;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+
+#gativia-console *{box-sizing:border-box;margin:0;padding:0}
+#gativia-console html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+#gativia-console h1, #gativia-console h2, #gativia-console h3, #gativia-console h4, #gativia-console h5{
+  font-family:'Space Grotesk',sans-serif;
+  color:var(--slate);
+  letter-spacing:-.025em;
+  line-height:1.12;
+  font-weight:600;
+}
+#gativia-console a{color:inherit;text-decoration:none}
+#gativia-console img{max-width:100%;display:block}
+#gativia-console ::selection{background:#cee6da;color:var(--forest-deep)}
+
+#gativia-console :focus-visible{outline:2px solid var(--forest);outline-offset:3px;border-radius:3px}
+
+#gativia-console .shell{max-width:var(--page);margin:0 auto;padding:0 var(--gutter)}
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+#gativia-console .act{
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  font-family:'Inter',sans-serif;font-size:15px;font-weight:500;
+  padding:13px 26px;border-radius:7px;cursor:pointer;
+  transition:background .18s ease, color .18s ease, box-shadow .18s ease;
+  border:none;white-space:nowrap;
+}
+#gativia-console .act-solid{background:var(--forest);color:#fff;box-shadow:var(--shadow-soft)}
+#gativia-console .act-solid:hover{background:var(--forest-deep)}
+#gativia-console .act-quiet{background:var(--stone);color:var(--slate)}
+#gativia-console .act-quiet:hover{background:#e9ebea}
+#gativia-console .act-ghost{background:transparent;color:var(--forest);padding-left:0;padding-right:0}
+#gativia-console .act-ghost:hover{color:var(--forest-deep)}
+#gativia-console .act-full{width:100%}
+
+/* ============================================================
+   NAV
+   ============================================================ */
+#gativia-console .topbar{
+  position:sticky;top:0;z-index:100;
+  background:rgba(255,255,255,.92);
+  backdrop-filter:saturate(180%) blur(14px);
+  -webkit-backdrop-filter:saturate(180%) blur(14px);
+}
+#gativia-console .topbar-in{
+  max-width:var(--page);margin:0 auto;padding:20px var(--gutter);
+  display:flex;align-items:center;justify-content:space-between;gap:36px;
+}
+#gativia-console .brand{display:flex;align-items:center;gap:10px;font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:20px;color:var(--forest);letter-spacing:-.03em}
+#gativia-console .brand i{font-size:17px}
+#gativia-console .brand em{font-style:normal;color:var(--faint);font-weight:500}
+#gativia-console .navlinks{display:flex;gap:32px;font-size:15px;color:var(--body)}
+#gativia-console .navlinks a{transition:color .18s ease}
+#gativia-console .navlinks a:hover{color:var(--forest)}
+#gativia-console .navside{display:flex;align-items:center;gap:22px}
+#gativia-console .navside .signin{font-size:15px;color:var(--body)}
+#gativia-console .navside .signin:hover{color:var(--forest)}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+#gativia-console .hero{padding:96px 0 104px}
+#gativia-console .hero-in{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:80px;align-items:center}
+#gativia-console .hero h1{font-size:clamp(38px,5vw,58px);max-width:15ch;margin-bottom:24px;font-weight:600}
+#gativia-console .hero-sub{font-size:19px;line-height:1.6;max-width:46ch;color:var(--body);margin-bottom:38px}
+#gativia-console .hero-acts{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:34px}
+#gativia-console .hero-foot{font-size:14.5px;color:var(--muted)}
+
+/* --- static abstract UI --- */
+#gativia-console .stage{position:relative;padding-bottom:46px}
+#gativia-console .panel{
+  background:#fff;border-radius:14px;padding:26px 26px 22px;
+  box-shadow:var(--shadow-lift);position:relative;z-index:2;
+}
+#gativia-console .panel-head{display:flex;align-items:baseline;justify-content:space-between;gap:14px;padding-bottom:18px}
+#gativia-console .panel-head h4{font-size:16px;font-weight:600}
+#gativia-console .panel-head span{font-size:13.5px;color:var(--muted)}
+#gativia-console .panel-meta{display:flex;gap:26px;padding:0 0 20px;border-bottom:1px solid var(--hair);margin-bottom:6px}
+#gativia-console .panel-meta div small{display:block;font-size:12.5px;color:var(--muted);margin-bottom:2px}
+#gativia-console .panel-meta div b{font-family:'Space Grotesk',sans-serif;font-size:15px;color:var(--slate);font-weight:600}
+
+#gativia-console .opt{display:grid;grid-template-columns:1fr auto auto;align-items:center;gap:16px;padding:13px 12px;margin:0 -12px;border-radius:8px}
+#gativia-console .opt-name{font-size:14.5px;color:var(--body);font-weight:500}
+#gativia-console .opt-name em{display:block;font-style:normal;font-size:12.5px;color:var(--faint);font-weight:400;margin-top:1px}
+#gativia-console .opt-eta{font-size:13.5px;color:var(--muted)}
+#gativia-console .opt-rate{font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:600;color:var(--slate);text-align:right;min-width:52px}
+#gativia-console .opt.picked{background:var(--mint)}
+#gativia-console .opt.picked .opt-name{color:var(--forest);font-weight:600}
+#gativia-console .opt.picked .opt-rate{color:var(--forest)}
+#gativia-console .opt-tick{display:inline-block;margin-left:7px;font-size:11px;color:var(--forest)}
+
+#gativia-console .panel-recon{margin-top:18px;padding-top:18px;border-top:1px solid var(--hair);display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
+#gativia-console .recon-set{display:flex;gap:22px}
+#gativia-console .recon-set div small{display:block;font-size:12px;color:var(--muted)}
+#gativia-console .recon-set div b{font-family:'Space Grotesk',sans-serif;font-size:14.5px;color:var(--slate);font-weight:600}
+#gativia-console .recon-flag{font-size:13px;color:var(--forest);font-weight:500;display:flex;align-items:center;gap:7px}
+
+#gativia-console .floater{
+  position:absolute;right:-14px;bottom:0;z-index:3;
+  background:var(--forest);color:#fff;border-radius:12px;
+  padding:19px 24px;box-shadow:var(--shadow-lift);min-width:212px;
+}
+#gativia-console .floater small{display:block;font-size:12.5px;color:#a5d0c0;margin-bottom:4px}
+#gativia-console .floater b{font-family:'Space Grotesk',sans-serif;font-size:25px;font-weight:600;letter-spacing:-.03em;display:block;line-height:1.15}
+#gativia-console .floater span{font-size:12.5px;color:#a5d0c0}
+
+/* ============================================================
+   QUIET PROOF STRIP
+   ============================================================ */
+#gativia-console .proof{background:var(--mist);padding:44px 0}
+#gativia-console .proof-in{display:grid;grid-template-columns:repeat(4,1fr);gap:36px}
+#gativia-console .proof-in div b{display:block;font-family:'Space Grotesk',sans-serif;font-size:28px;color:var(--forest);font-weight:600;letter-spacing:-.03em;line-height:1.1;margin-bottom:5px}
+#gativia-console .proof-in div span{font-size:14px;color:var(--muted);line-height:1.5;display:block;max-width:26ch}
+
+/* ============================================================
+   COMPARISON REDESIGN
+   ============================================================ */
+#gativia-console .vs-section {
+  padding: 100px 0;
+  background: var(--mint);
+  position: relative;
+  overflow: hidden;
+}
+#gativia-console .vs-header {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto 60px;
+}
+#gativia-console .vs-header h2 {
+  font-size: 36px;
+  margin-bottom: 16px;
+}
+#gativia-console .vs-header p {
+  color: var(--muted);
+  font-size: 18px;
+}
+#gativia-console .vs-grid {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 30px;
+  align-items: stretch;
+  position: relative;
+}
+#gativia-console .vs-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+#gativia-console .vs-divider span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  background: var(--slate);
+  color: #fff;
+  border-radius: 50%;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  box-shadow: 0 0 0 8px var(--mint);
+}
+#gativia-console .vs-card {
+  background: #fff;
+  border-radius: 24px;
+  padding: 40px;
+  box-shadow: var(--shadow-soft);
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+#gativia-console .vs-card.before {
+  border: 1px solid var(--hair);
+}
+#gativia-console .vs-card.after {
+  background: linear-gradient(145deg, #ffffff, #f0f9f6);
+  border: 1px solid rgba(10, 79, 64, 0.15);
+  box-shadow: var(--shadow-lift);
+}
+#gativia-console .vs-card:hover {
+  transform: translateY(-4px);
+}
+#gativia-console .vs-card-head {
+  margin-bottom: 30px;
+  padding-bottom: 24px;
+  border-bottom: 1px dashed var(--hair);
+}
+#gativia-console .vs-badge {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 100px;
+  font-size: 13px;
+  font-weight: 600;
+  background: var(--stone);
+  color: var(--muted);
+  margin-bottom: 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+#gativia-console .vs-badge.gativia {
+  background: rgba(10, 79, 64, 0.1);
+  color: var(--forest);
+}
+#gativia-console .vs-card h3 {
+  font-size: 22px;
+  line-height: 1.35;
+  color: var(--slate);
+}
+#gativia-console .vs-card.after h3 {
+  color: var(--forest-deep);
+}
+#gativia-console .vs-list {
+  list-style: none;
+}
+#gativia-console .vs-list li {
+  display: flex;
+  gap: 16px;
+  padding: 12px 0;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--body);
+  align-items: flex-start;
+}
+#gativia-console .vs-num {
+  flex: 0 0 auto;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 13px;
+  font-weight: 700;
+  font-family: 'Space Grotesk', sans-serif;
+  margin-top: 2px;
+}
+#gativia-console .vs-card.before .vs-num {
+  background: #fdf2f2;
+  color: #d15c5c;
+}
+#gativia-console .vs-card.after .vs-num {
+  background: rgba(10, 79, 64, 0.1);
+  color: var(--forest);
+}
+@media (max-width: 900px) {
+  #gativia-console .vs-grid {
+    grid-template-columns: 1fr;
+  }
+  #gativia-console .vs-divider {
+    transform: rotate(90deg);
+    margin: -15px 0;
+  }
+}
+
+/* ============================================================
+   SECTIONS
+   ============================================================ */
+#gativia-console .band{padding:104px 0}
+#gativia-console .band.tinted{background:var(--mist)}
+#gativia-console .sec-head{max-width:60ch;margin-bottom:62px}
+#gativia-console .sec-head h2{font-size:clamp(28px,3.6vw,40px);margin-bottom:16px;max-width:20ch}
+#gativia-console .sec-head p{font-size:17.5px;line-height:1.6;color:var(--body);max-width:56ch}
+
+#gativia-console .feat{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px}
+#gativia-console .feat-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 32px;
+  box-shadow: var(--shadow-soft);
+  border: 1px solid var(--hair);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column;
+}
+#gativia-console .feat-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lift);
+  border-color: rgba(10, 79, 64, 0.15);
+}
+#gativia-console .feat-card-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+  min-height: 48px;
+}
+#gativia-console .int-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 24px;
+  margin-bottom: 64px;
+}
+#gativia-console .feat-card i {
+  flex: 0 0 48px;
+  font-size: 20px;
+  color: var(--forest);
+  background: rgba(10, 79, 64, 0.08);
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  margin: 0;
+  padding: 0;
+}
+#gativia-console .feat-card h3 {
+  font-size: 19px;
+  color: var(--slate);
+  margin: 0;
+}
+#gativia-console .feat-card p {
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--body);
+  margin: 0;
+}
+
+/* ============================================================
+   AUDITRAX — signature ledger
+   ============================================================ */
+#gativia-console .ledger-band{background:var(--forest);color:#fff;padding:104px 0}
+#gativia-console .ledger-head{max-width:58ch;margin-bottom:54px}
+#gativia-console .ledger-head h2{color:#fff;font-size:clamp(28px,3.6vw,40px);margin-bottom:16px;max-width:20ch}
+#gativia-console .ledger-head p{font-size:17.5px;color:#b8d9cc;max-width:56ch;line-height:1.6}
+
+#gativia-console .ledger{background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 30px 70px -30px rgba(0,0,0,.5)}
+#gativia-console .led-row{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr 1.5fr;gap:0}
+#gativia-console .led-row.head>div{background:var(--stone);font-size:12.5px;color:var(--muted);font-weight:500;padding:14px 22px}
+#gativia-console .led-row>div{padding:18px 22px;font-size:14.5px;color:var(--body);border-top:1px solid var(--hair);display:flex;align-items:center}
+#gativia-console .led-row.head>div{border-top:none}
+#gativia-console .led-id{font-family:'IBM Plex Mono',monospace;font-size:13.5px;color:var(--slate)}
+#gativia-console .led-num{font-family:'Space Grotesk',sans-serif;font-weight:600;color:var(--slate)}
+#gativia-console .led-ok{color:var(--forest);font-weight:500;gap:8px}
+#gativia-console .led-gap{background:#fdf7f2}
+#gativia-console .led-gap .led-num{color:#8a4b28}
+#gativia-console .led-warn{color:#8a4b28;font-weight:500;gap:8px}
+#gativia-console .led-foot{padding:20px 22px;background:var(--mist);border-top:1px solid var(--hair);display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;font-size:14px;color:var(--muted)}
+#gativia-console .led-foot b{color:var(--slate);font-weight:600}
+
+#gativia-console .ledger-notes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:44px;margin-top:56px;padding-top:48px;border-top:1px solid rgba(255,255,255,.16)}
+#gativia-console .ledger-notes h4{color:#fff;font-size:17px;margin-bottom:9px}
+#gativia-console .ledger-notes p{color:#b8d9cc;font-size:15px;line-height:1.6;max-width:32ch}
+
+/* ============================================================
+   INTEGRATE + API
+   ============================================================ */
+#gativia-console .int-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:44px;margin-bottom:76px}
+#gativia-console .int-grid i{font-size:20px;color:var(--forest);margin-bottom:16px;display:block}
+#gativia-console .int-grid h4{font-size:16px;margin-bottom:7px}
+#gativia-console .int-grid p{font-size:14.5px;color:var(--body);max-width:26ch}
+
+#gativia-console .api{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:64px;align-items:center}
+#gativia-console .api-copy h3{font-size:24px;margin-bottom:14px;max-width:18ch}
+#gativia-console .api-copy p{font-size:16px;max-width:40ch;margin-bottom:22px}
+#gativia-console .code{
+  background:var(--code-bg);border-radius:12px;padding:30px 32px;
+  font-family:'IBM Plex Mono',monospace;font-size:13.5px;line-height:1.85;
+  color:var(--code-text);overflow-x:auto;box-shadow:var(--shadow-lift);
+}
+#gativia-console .code .verb{color:#7fc9ac}
+#gativia-console .code .path{color:#e8efec}
+#gativia-console .code .key{color:#8fb6e0}
+#gativia-console .code .str{color:#a7e0ce}
+#gativia-console .code .num{color:#e3c98a}
+#gativia-console .code .punc{color:#5f7a72}
+#gativia-console .code .cmt{color:#5f7a72}
+#gativia-console .code-rule{height:1px;background:rgba(255,255,255,.09);margin:18px 0}
+
+/* ============================================================
+   PRICING
+   ============================================================ */
+#gativia-console .pricing{background:var(--mist);padding:104px 0}
+#gativia-console .price-head{max-width:56ch;margin-bottom:58px}
+#gativia-console .price-head h2{font-size:clamp(28px,3.6vw,40px);margin-bottom:16px;max-width:20ch}
+#gativia-console .price-head p{font-size:17.5px;color:var(--body);max-width:54ch}
+#gativia-console .plans{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:26px;align-items:start}
+#gativia-console .plan{background:transparent;border-radius:14px;padding:38px 32px}
+#gativia-console .plan.lead{background:#fff;box-shadow:var(--shadow-lift)}
+#gativia-console .plan h3{font-size:19px;margin-bottom:6px}
+#gativia-console .plan .who{font-size:14px;color:var(--muted);margin-bottom:26px;min-height:42px;max-width:26ch}
+#gativia-console .plan .fig{font-family:'Space Grotesk',sans-serif;font-size:40px;font-weight:600;color:var(--slate);letter-spacing:-.035em;line-height:1;margin-bottom:6px}
+#gativia-console .plan .fig sup{font-size:20px;font-weight:500;vertical-align:top;position:relative;top:6px;margin-right:1px}
+#gativia-console .plan .per{font-size:14px;color:var(--muted);margin-bottom:30px}
+#gativia-console .plan ul{list-style:none;margin-bottom:32px}
+#gativia-console .plan li{display:flex;gap:12px;padding:9px 0;font-size:14.5px;line-height:1.55}
+#gativia-console .plan li i{color:var(--forest);font-size:11px;margin-top:6px;flex:0 0 auto}
+#gativia-console .price-note{margin-top:38px;font-size:14.5px;color:var(--muted);max-width:64ch}
+
+/* ============================================================
+   CLOSER
+   ============================================================ */
+#gativia-console .closer{padding:104px 0;text-align:center}
+#gativia-console .closer h2{font-size:clamp(28px,3.8vw,42px);max-width:18ch;margin:0 auto 18px}
+#gativia-console .closer p{font-size:18px;max-width:48ch;margin:0 auto 34px}
+#gativia-console .closer-acts{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+#gativia-console .foot{background:var(--slate);color:#9aa5a1;padding:76px 0 34px}
+#gativia-console .foot-in{display:grid;grid-template-columns:1.7fr 1fr 1fr 1fr 1.2fr;gap:52px;padding-bottom:52px}
+#gativia-console .foot-brand{display:flex;align-items:center;gap:10px;font-family:'Space Grotesk',sans-serif;font-size:20px;font-weight:600;color:#fff;letter-spacing:-.03em;margin-bottom:14px}
+#gativia-console .foot-blurb{font-size:14.5px;line-height:1.65;max-width:32ch;color:#8b9793}
+#gativia-console .foot-col h5{color:#fff;font-size:14.5px;margin-bottom:18px;font-weight:600}
+#gativia-console .foot-col a{display:block;font-size:14.5px;color:#8b9793;padding:6px 0;transition:color .18s ease}
+#gativia-console .foot-col a:hover{color:#fff}
+#gativia-console .foot-base{border-top:1px solid rgba(255,255,255,.1);padding-top:28px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:13.5px;color:#78837f}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width:1040px){
+  #gativia-console .engine{grid-template-columns:1fr;gap:22px}
+  #gativia-console .cov{grid-template-columns:1fr;gap:44px}
+  #gativia-console .rate-top{align-items:flex-start}
+}
+@media (max-width:860px){
+  #gativia-console .rate-band{padding:72px 0}
+  #gativia-console .form{padding:26px 24px}
+  #gativia-console .dotgrid{grid-template-columns:repeat(25,1fr);gap:4px}
+  #gativia-console .partners{margin-top:40px;padding-top:36px}
+}
+@media (max-width:560px){
+  #gativia-console .res-grid{grid-template-columns:1fr;gap:18px}
+  #gativia-console .res-right{text-align:left;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+  #gativia-console .res-break{margin:0;order:2}
+  #gativia-console .res-price{order:1}
+  #gativia-console .res-right .act{order:3;width:100%}
+  #gativia-console .goal{width:100%}
+  #gativia-console .goal button{flex:1 1 0;padding:10px 6px}
+  #gativia-console .dotgrid{grid-template-columns:repeat(20,1fr)}
+  #gativia-console .cov-stat b{font-size:32px}
+}
+
+/* ============================================================
+   RATE ENGINE
+   ============================================================ */
+#gativia-console .rate-band{padding:104px 0;background:var(--mist)}
+#gativia-console .rate-top{display:flex;justify-content:space-between;align-items:flex-end;gap:44px;flex-wrap:wrap;margin-bottom:46px}
+#gativia-console .rate-top .sec-head{margin-bottom:0}
+#gativia-console .goal-wrap{flex:0 0 auto}
+#gativia-console .goal-wrap>span{display:block;font-size:14px;color:var(--muted);margin-bottom:9px}
+#gativia-console .goal{display:inline-flex;background:#fff;border-radius:9px;padding:4px;box-shadow:var(--shadow-soft);gap:2px}
+#gativia-console .goal button{font-family:'Inter',sans-serif;font-size:14px;font-weight:500;padding:9px 17px;border:none;border-radius:6px;background:transparent;color:var(--body);cursor:pointer;transition:background .18s,color .18s}
+#gativia-console .goal button:hover{color:var(--forest)}
+#gativia-console .goal button[aria-pressed="true"]{background:var(--forest);color:#fff}
+
+#gativia-console .engine{display:grid;grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr);gap:30px;align-items:stretch}
+#gativia-console .form{background:#fff;border-radius:14px;padding:30px;box-shadow:var(--shadow-soft);display:flex;flex-direction:column;justify-content:space-between;height:100%}
+#gativia-console .form h3{font-size:17px;margin-bottom:26px;display:flex;align-items:center;gap:11px}
+#gativia-console .form h3 i{color:var(--forest);font-size:14px}
+#gativia-console .fld{margin-bottom:24px}
+#gativia-console .fld:last-child{margin-bottom:0}
+#gativia-console .fld>label, #gativia-console .fld>span.lbl{display:block;font-size:13.5px;color:var(--muted);margin-bottom:9px}
+#gativia-console .pair{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+#gativia-console .pin{position:relative}
+#gativia-console .pin input{width:100%;font-family:'Inter',sans-serif;font-size:16px;font-weight:500;color:var(--slate);padding:12px 14px;padding-right:74px;background:var(--mist);border:1px solid var(--hair);border-radius:8px;transition:border-color .18s,background .18s}
+#gativia-console .pin input:focus{outline:none;border-color:var(--forest);background:#fff}
+#gativia-console .pin input.bad{border-color:#c9906a}
+#gativia-console .pin .city{position:absolute;right:13px;top:50%;transform:translateY(-50%);font-size:12.5px;color:var(--faint);pointer-events:none;max-width:64px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:right}
+
+#gativia-console .wt-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+#gativia-console .wt-head b{font-family:'Space Grotesk',sans-serif;font-size:17px;color:var(--slate);font-weight:600}
+#gativia-console .rng{width:100%;-webkit-appearance:none;appearance:none;height:5px;border-radius:3px;background:var(--hair);margin:16px 0 8px;cursor:pointer}
+#gativia-console .rng::-webkit-slider-thumb{-webkit-appearance:none;width:19px;height:19px;border-radius:50%;background:var(--forest);cursor:pointer;box-shadow:0 1px 5px rgba(10,79,64,.4)}
+#gativia-console .rng::-moz-range-thumb{width:19px;height:19px;border:none;border-radius:50%;background:var(--forest);cursor:pointer}
+#gativia-console .rng:focus-visible{outline:2px solid var(--forest);outline-offset:4px}
+#gativia-console .ticks{display:flex;justify-content:space-between;font-size:12px;color:var(--faint)}
+
+#gativia-console .dims{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+#gativia-console .dims input{width:100%;text-align:center;font-family:'Inter',sans-serif;font-size:16px;font-weight:500;color:var(--slate);padding:12px 6px;background:var(--mist);border:1px solid var(--hair);border-radius:8px}
+#gativia-console .dims input:focus{outline:none;border-color:var(--forest);background:#fff}
+#gativia-console .dims small{display:block;text-align:center;font-size:12px;color:var(--faint);margin-top:7px}
+
+#gativia-console .calc{background:var(--mint);border-radius:10px;padding:16px 18px}
+#gativia-console .calc-row{display:flex;justify-content:space-between;align-items:center;gap:14px;font-size:14px;padding:4px 0;color:var(--body)}
+#gativia-console .calc-row b{font-family:'Space Grotesk',sans-serif;font-weight:600;color:var(--slate)}
+#gativia-console .calc-row.tot{border-top:1px solid rgba(10,79,64,.15);margin-top:9px;padding-top:12px}
+#gativia-console .calc-row.tot span:first-child{color:var(--slate);font-weight:600}
+#gativia-console .chip{background:#fff;color:var(--forest);border-radius:6px;padding:5px 12px;font-size:13.5px;font-weight:600;font-family:'Space Grotesk',sans-serif}
+
+#gativia-console .seg{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+#gativia-console .seg button{font-family:'Inter',sans-serif;font-size:14.5px;font-weight:500;padding:13px 8px;border-radius:8px;border:1px solid var(--hair);background:#fff;color:var(--body);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:9px;transition:background .18s,color .18s,border-color .18s}
+#gativia-console .seg button i{font-size:13px}
+#gativia-console .seg button:hover{border-color:var(--forest)}
+#gativia-console .seg button[aria-pressed="true"]{background:var(--forest);border-color:var(--forest);color:#fff}
+
+#gativia-console .res-head{display:flex;justify-content:space-between;align-items:baseline;gap:16px;margin-bottom:16px;font-size:13.5px;color:var(--muted);flex-wrap:wrap}
+#gativia-console .res-head b{color:var(--slate);font-weight:600}
+#gativia-console .res{background:#fff;border-radius:12px;padding:22px 24px;box-shadow:var(--shadow-soft);margin-bottom:12px;position:relative}
+#gativia-console .res.top{box-shadow:var(--shadow-lift);padding-top:27px;margin-bottom:18px}
+#gativia-console .res-badge{position:absolute;top:-11px;left:22px;background:var(--forest);color:#fff;font-size:12px;font-weight:600;padding:5px 13px;border-radius:6px;display:inline-flex;align-items:center;gap:7px}
+#gativia-console .res-grid{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:26px;align-items:start}
+#gativia-console .res-name{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:6px}
+#gativia-console .res-name h4{font-size:18px}
+#gativia-console .res-code{font-size:12px;color:var(--muted);background:var(--stone);padding:3px 9px;border-radius:5px}
+#gativia-console .res-note{font-size:14px;color:var(--body);margin-bottom:13px;max-width:44ch}
+#gativia-console .res-stats{display:flex;gap:20px;flex-wrap:wrap;font-size:13.5px;color:var(--muted)}
+#gativia-console .res-stats b{color:var(--slate);font-weight:600}
+#gativia-console .res-right{text-align:right;flex:0 0 auto}
+#gativia-console .res-price{font-family:'Space Grotesk',sans-serif;font-size:27px;font-weight:600;color:var(--slate);letter-spacing:-.03em;line-height:1}
+#gativia-console .res-break{font-size:12.5px;color:var(--faint);margin:6px 0 14px}
+#gativia-console .res-why{margin-top:17px;padding-top:15px;border-top:1px solid var(--hair);font-size:13.5px;color:var(--forest);display:flex;gap:10px;align-items:flex-start;line-height:1.55}
+#gativia-console .res-why i{margin-top:4px;font-size:12px;flex:0 0 auto}
+#gativia-console .act-sm{padding:10px 18px;font-size:14px}
+#gativia-console .empty{background:#fff;border-radius:12px;padding:44px 30px;box-shadow:var(--shadow-soft);color:var(--muted);font-size:15px;text-align:center}
+
+/* ============================================================
+   COVERAGE
+   ============================================================ */
+#gativia-console .cov{display:grid;grid-template-columns:minmax(0,.72fr) minmax(0,1.28fr);gap:64px;align-items:center}
+#gativia-console .cov-stats{display:grid;gap:30px}
+#gativia-console .cov-stat b{display:block;font-family:'Space Grotesk',sans-serif;font-size:38px;font-weight:600;color:var(--forest);letter-spacing:-.035em;line-height:1;margin-bottom:7px}
+#gativia-console .cov-stat span{font-size:14.5px;color:var(--body);display:block;max-width:30ch}
+#gativia-console .dotgrid{display:grid;grid-template-columns:repeat(40,1fr);gap:5px}
+#gativia-console .dotgrid i{display:block;aspect-ratio:1/1;border-radius:50%;background:var(--forest);opacity:.82}
+#gativia-console .dotgrid i.off{background:#d3dbd8;opacity:1}
+#gativia-console .cov-cap{margin-top:26px;font-size:14px;color:var(--muted);max-width:62ch;display:flex;gap:22px;flex-wrap:wrap}
+#gativia-console .cov-key{display:flex;align-items:center;gap:8px}
+#gativia-console .cov-key em{width:9px;height:9px;border-radius:50%;background:var(--forest);opacity:.82;display:inline-block;flex:0 0 auto}
+#gativia-console .cov-key.off em{background:#d3dbd8;opacity:1}
+#gativia-console .partners{display:flex;flex-wrap:wrap;gap:9px;margin-top:52px;padding-top:44px;border-top:1px solid var(--hair)}
+#gativia-console .partners span{font-size:14px;color:var(--body);background:#fff;padding:8px 15px;border-radius:7px;box-shadow:var(--shadow-soft)}
+#gativia-console .partners span.more{background:transparent;box-shadow:none;color:var(--muted);padding-left:6px}
+
+/* ============================================================
+   INLINE SVG VISUALS
+   ============================================================ */
+#gativia-console .pipe{width:100%;height:auto;display:block;margin-bottom:52px}
+#gativia-console .tline{width:100%;height:auto;display:block;margin-bottom:64px}
+#gativia-console .viz-cap{font-size:14px;color:var(--muted);margin:-38px 0 62px;max-width:64ch}
+
+@keyframes marchRight {
+  to { stroke-dashoffset: -16; }
+}
+@keyframes pulseGlow {
+  0% { opacity: 0.6; stroke-width: 2; }
+  100% { opacity: 1; stroke-width: 4; }
+}
+#gativia-console .marching-line {
+  animation: marchRight 0.6s linear infinite;
+  opacity: 0.6;
+}
+#gativia-console .error-pulse {
+  animation: pulseGlow 1s ease-in-out infinite alternate;
+}
+
+/* ============================================================
+   RESPONSIVE — new modules
+   ============================================================ */
+@media (max-width:1040px){
+  #gativia-console .engine{grid-template-columns:1fr;gap:22px}
+  #gativia-console .cov{grid-template-columns:1fr;gap:44px}
+  #gativia-console .rate-top{align-items:flex-start}
+  #gativia-console .int-grid{grid-template-columns:repeat(2,1fr)}
+  #gativia-console .feat{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:860px){
+  #gativia-console .rate-band{padding:72px 0}
+  #gativia-console .form{padding:26px 24px}
+  #gativia-console .dotgrid{grid-template-columns:repeat(25,1fr);gap:4px}
+  #gativia-console .partners{margin-top:40px;padding-top:36px}
+}
+@media (max-width:560px){
+  #gativia-console .res-grid{grid-template-columns:1fr;gap:18px}
+  #gativia-console .res-right{text-align:left;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+  #gativia-console .res-break{margin:0;order:2}
+  #gativia-console .res-price{order:1}
+  #gativia-console .res-right .act{order:3;width:100%}
+  #gativia-console .goal{width:100%}
+  #gativia-console .goal button{flex:1 1 0;padding:10px 6px}
+  #gativia-console .dotgrid{grid-template-columns:repeat(20,1fr)}
+  #gativia-console .cov-stat b{font-size:32px}
+  #gativia-console .int-grid{grid-template-columns:1fr}
+  #gativia-console .feat{grid-template-columns:1fr}
+}

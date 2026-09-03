@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
+import { Link } from 'react-router-dom';
 import { AuditRaxLogo } from './components/Logo';
 import { 
   BarChart3, 
@@ -298,6 +299,9 @@ export default function App() {
 
             {/* Actions */}
             <div className="hidden lg:flex items-center space-x-4">
+              <Link to="/gativia" className="bg-cyan-50 text-cyan-700 hover:bg-cyan-100 border border-cyan-100 px-5 py-2.5 rounded-xl text-sm font-bold transition shadow-sm inline-flex items-center justify-center gap-1.5">
+                <Send className="w-4 h-4" /> Ship
+              </Link>
               <button onClick={() => scrollToContact()} className="bg-gray-900 hover:bg-gray-800 text-white px-5 py-2.5 rounded-xl text-sm font-semibold transition shadow-lg hover:shadow-cyan-500/10 border border-gray-800">
                 Book Enterprise Demo
               </button>
@@ -335,6 +339,9 @@ export default function App() {
               <a href="#workflow" onClick={() => setMobileMenuOpen(false)} className="block px-4 py-3 text-base font-semibold text-gray-700 hover:bg-gray-50 rounded-lg">Integrations</a>
               <a href="#faq" onClick={() => setMobileMenuOpen(false)} className="block px-4 py-3 text-base font-semibold text-gray-700 hover:bg-gray-50 rounded-lg">FAQ</a>
               <div className="pt-4 border-t border-gray-100 flex flex-col gap-3 px-4">
+                <Link to="/gativia" className="w-full bg-cyan-50 text-cyan-700 border border-cyan-100 text-center py-3 rounded-lg font-bold shadow-sm flex items-center justify-center gap-2">
+                  <Send className="w-4 h-4" /> Ship with GatiVia
+                </Link>
                 <button onClick={() => { setMobileMenuOpen(false); scrollToContact(); }} className="w-full bg-gray-900 text-white text-center py-3 rounded-lg font-bold shadow-md">
                   Book Enterprise Demo
                 </button>
@@ -431,13 +438,33 @@ export default function App() {
       <section className="bg-white border-y border-gray-100 py-10">
         <div className="max-w-7xl mx-auto px-4 text-center">
           <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-6">Integrates seamlessly with your tech stack</p>
-          <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-50 grayscale hover:opacity-80 hover:grayscale-0 transition-all duration-500">
+          <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16 transition-all duration-500">
             <span className="text-xl md:text-2xl font-black text-emerald-600 tracking-tight">Shopify</span>
             <span className="text-xl md:text-2xl font-bold text-gray-900 tracking-tighter">amazon</span>
             <span className="text-xl md:text-2xl font-extrabold text-red-600 tracking-wide">DELHIVERY</span>
             <span className="text-xl md:text-2xl font-bold text-blue-900 tracking-tight">BLUE DART</span>
             <span className="text-xl md:text-2xl font-bold text-violet-600">Shiprocket</span>
             <span className="text-xl md:text-2xl font-extrabold text-blue-500">Razorpay</span>
+          </div>
+        </div>
+      </section>
+
+      {/* GATIVIA TEASER SECTION */}
+      <section className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="bg-gradient-to-br from-gray-900 to-slate-800 rounded-3xl p-8 md:p-12 text-center text-white shadow-2xl relative overflow-hidden">
+            <div className="absolute top-0 right-0 -mr-20 -mt-20 w-64 h-64 bg-cyan-500/20 rounded-full blur-3xl pointer-events-none"></div>
+            <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-64 h-64 bg-emerald-500/20 rounded-full blur-3xl pointer-events-none"></div>
+            
+            <h2 className="text-3xl md:text-4xl font-black mb-4 tracking-tight relative z-10">Introducing <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyan-400">GatiVia</span></h2>
+            <p className="text-lg text-gray-300 max-w-2xl mx-auto mb-8 relative z-10">
+              The intelligent aggregation platform for modern logistics. Book across 26 courier partners from one screen, and watch every shipment reconcile itself automatically.
+            </p>
+            <div className="relative z-10">
+              <Link to="/gativia" className="inline-flex items-center gap-2 bg-white text-gray-900 hover:bg-gray-100 px-8 py-3.5 rounded-xl font-bold transition-all shadow-lg hover:shadow-cyan-500/20">
+                Explore GatiVia <ArrowRight className="w-5 h-5" />
+              </Link>
+            </div>
           </div>
         </div>
       </section>
@@ -952,7 +979,7 @@ export default function App() {
               <ul className="space-y-3 text-sm text-gray-400">
                 <li className="leading-relaxed">📍 Coimbatore, Tamil Nadu, India</li>
                 <li>✉️ <a href="mailto:connect@auditrax.in" className="hover:text-white transition">connect@auditrax.in</a></li>
-                <li>📞 +91 9082348560</li>
+                <li>📞 <a href="tel:+919082348560" className="hover:text-white transition">+91 9082348560</a></li>
               </ul>
               
               <div className="pt-2">
