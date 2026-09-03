@@ -652,11 +652,15 @@ export default function GatiVia() {
             </div>
           </div>
 
-          <div className="partners">
-            <span>Delhivery</span><span>Blue Dart</span><span>Xpressbees</span><span>Ecom Express</span>
-            <span>DTDC</span><span>Shadowfax</span><span>Ekart</span><span>Amazon Shipping</span>
-            <span>India Post</span><span>The Professional Couriers</span><span>Gati</span><span>Safexpress</span>
-            <span>Trackon</span><span>Smartr</span><span className="more">and twelve more</span>
+          <div className="partners-marquee-container" title="Top Integrated Courier Partners">
+            <div className="partners-marquee">
+              <span>Delhivery</span><span>Blue Dart</span><span>Xpressbees</span>
+              <span>DTDC</span><span>Shadowfax</span><span>Ekart</span><span>Amazon Shipping</span>
+              
+              {/* Duplicated set for seamless infinite scrolling */}
+              <span aria-hidden="true">Delhivery</span><span aria-hidden="true">Blue Dart</span><span aria-hidden="true">Xpressbees</span>
+              <span aria-hidden="true">DTDC</span><span aria-hidden="true">Shadowfax</span><span aria-hidden="true">Ekart</span><span aria-hidden="true">Amazon Shipping</span>
+            </div>
           </div>
         </div>
       </section>
@@ -669,40 +673,46 @@ export default function GatiVia() {
             <p>A failed delivery costs you twice — forward freight, then reverse. The work is in catching it before the parcel turns around.</p>
           </div>
 
-          <svg className="tline" style={{marginBottom: '18px'}} viewBox="0 0 1020 152" role="img" aria-label="A shipment timeline running from pickup to delivery, with a failed attempt on Wednesday evening that triggers an automatic reattempt and completes on Thursday morning.">
-            <line x1="20" y1="62" x2="1000" y2="62" stroke="#e8ebe9" strokeWidth="2" />
-            <line x1="20" y1="62" x2="1000" y2="62" stroke="#0a4f40" strokeWidth="2" strokeDasharray="8 8" className="marching-line" />
-            <line x1="608" y1="62" x2="804" y2="62" stroke="#c9906a" strokeWidth="3" className="error-pulse" />
+          <svg className="tline" style={{marginBottom: '80px'}} viewBox="0 0 1020 200" role="img" aria-label="A shipment timeline running from pickup to delivery, with a failed attempt on Wednesday evening that triggers an automatic reattempt and completes on Thursday morning.">
+            <line x1="20" y1="100" x2="1000" y2="100" stroke="#e8ebe9" strokeWidth="2" />
+            
+            {/* The traveling truck */}
+            <foreignObject x="0" y="84" width="40" height="32" className="traveling-truck">
+              <div style={{ display: 'flex', alignItems: 'center', justifyItems: 'center', width: '100%', height: '100%' }}>
+                <i className="fa-solid fa-truck-fast" style={{ fontSize: '20px', color: '#0a4f40', background: '#fafafa', padding: '0 4px' }}></i>
+              </div>
+            </foreignObject>
+            
+            <line x1="608" y1="100" x2="804" y2="100" stroke="#ef4444" strokeWidth="3" className="error-pulse" />
 
             <g fontFamily="Inter, sans-serif">
-              <circle cx="20" cy="62" r="6.5" fill="#0a4f40" />
-              <text x="20" y="94" fontSize="14" fontWeight="500" fill="#111827">Picked up</text>
-              <text x="20" y="114" fontSize="12.5" fill="#77837f">Mon 09:14 · Delhivery</text>
+              <circle cx="20" cy="100" r="6.5" fill="#0a4f40" />
+              <text x="20" y="150" fontSize="14" fontWeight="500" fill="#111827">Picked up</text>
+              <text x="20" y="170" fontSize="12.5" fill="#77837f">Mon 09:14 · Delhivery</text>
 
-              <circle cx="216" cy="62" r="6.5" fill="#0a4f40" />
-              <text x="216" y="94" fontSize="14" fontWeight="500" fill="#111827" textAnchor="middle">Hub scan</text>
-              <text x="216" y="114" fontSize="12.5" fill="#77837f" textAnchor="middle">Tue 02:40 · Nagpur</text>
+              <circle cx="216" cy="100" r="6.5" fill="#0a4f40" />
+              <text x="216" y="30" fontSize="14" fontWeight="500" fill="#111827" textAnchor="middle">Hub scan</text>
+              <text x="216" y="50" fontSize="12.5" fill="#77837f" textAnchor="middle">Tue 02:40 · Nagpur</text>
 
-              <circle cx="412" cy="62" r="6.5" fill="#0a4f40" />
-              <text x="412" y="94" fontSize="14" fontWeight="500" fill="#111827" textAnchor="middle">Out for delivery</text>
-              <text x="412" y="114" fontSize="12.5" fill="#77837f" textAnchor="middle">Wed 08:05 · Delhi</text>
+              <circle cx="412" cy="100" r="6.5" fill="#0a4f40" />
+              <text x="412" y="150" fontSize="14" fontWeight="500" fill="#111827" textAnchor="middle">Out for delivery</text>
+              <text x="412" y="170" fontSize="12.5" fill="#77837f" textAnchor="middle">Wed 08:05 · Delhi</text>
 
-              <circle cx="608" cy="62" r="7.5" fill="#b0703f" />
-              <text x="608" y="94" fontSize="14" fontWeight="500" fill="#8a4b28" textAnchor="middle">Attempt failed</text>
-              <text x="608" y="114" fontSize="12.5" fill="#8a4b28" textAnchor="middle">Wed 17:22 · not reachable</text>
-              <line x1="608" y1="30" x2="608" y2="52" stroke="#c9906a" strokeWidth="1.5" />
-              <text x="608" y="22" fontSize="12.5" fill="#8a4b28" textAnchor="middle">WhatsApp and IVR sent in 40 seconds</text>
+              <circle cx="608" cy="100" r="7.5" fill="#dc2626" />
+              <text x="608" y="30" fontSize="14" fontWeight="500" fill="#b91c1c" textAnchor="middle">Attempt failed</text>
+              <text x="608" y="50" fontSize="12.5" fill="#b91c1c" textAnchor="middle">Wed 17:22 · not reachable</text>
+              <line x1="608" y1="118" x2="608" y2="145" stroke="#ef4444" strokeWidth="1.5" />
+              <text x="608" y="165" fontSize="12.5" fill="#b91c1c" textAnchor="middle">WhatsApp and IVR sent in 40 seconds</text>
 
-              <circle cx="804" cy="62" r="6.5" fill="#b0703f" />
-              <text x="804" y="94" fontSize="14" fontWeight="500" fill="#111827" textAnchor="middle">Buyer confirmed</text>
-              <text x="804" y="114" fontSize="12.5" fill="#77837f" textAnchor="middle">Wed 17:48 · reattempt set</text>
+              <circle cx="804" cy="100" r="6.5" fill="#dc2626" />
+              <text x="804" y="150" fontSize="14" fontWeight="500" fill="#111827" textAnchor="middle">Buyer confirmed</text>
+              <text x="804" y="170" fontSize="12.5" fill="#77837f" textAnchor="middle">Wed 17:48 · reattempt set</text>
 
-              <circle cx="1000" cy="62" r="8.5" fill="#0a4f40" />
-              <text x="1000" y="94" fontSize="14" fontWeight="600" fill="#0a4f40" textAnchor="end">Delivered</text>
-              <text x="1000" y="114" fontSize="12.5" fill="#77837f" textAnchor="end">Thu 11:40 · COD collected</text>
+              <circle cx="1000" cy="100" r="8.5" fill="#0a4f40" />
+              <text x="1000" y="30" fontSize="14" fontWeight="600" fill="#0a4f40" textAnchor="end">Delivered</text>
+              <text x="1000" y="50" fontSize="12.5" fill="#77837f" textAnchor="end">Thu 11:40 · COD collected</text>
             </g>
           </svg>
-          <p className="viz-cap" style={{margin: '0 0 62px'}}>One shipment, one sequence. Every courier reports scan events differently, so the console normalises them into the same six states before your team or your buyer ever sees them.</p>
 
           <div className="feat">
             <div className="feat-card">
@@ -878,33 +888,7 @@ export default function GatiVia() {
             </div>
           </div>
 
-          <div className="api">
-            <div className="api-copy">
-              <h3>One call to book, one webhook to reconcile</h3>
-              <p>Send the order. The platform compares live rates across every connected partner, applies your allocation rules and returns an AWB with the quote already recorded against it.</p>
-              <a href="#" className="act act-ghost">Read the API reference <i className="fa-solid fa-arrow-right" style={{fontSize: '12px'}}></i></a>
-            </div>
-            <div className="code">
-              <span className="verb">POST</span> <span className="path">/v1/shipments</span><br/>
-              <span className="punc">{'{'}</span><br/>
-              &nbsp;&nbsp;<span className="key">"order_id"</span><span className="punc">:</span> <span className="str">"ORD-48213"</span><span className="punc">,</span><br/>
-              &nbsp;&nbsp;<span className="key">"pickup_pincode"</span><span className="punc">:</span> <span className="str">"560103"</span><span className="punc">,</span><br/>
-              &nbsp;&nbsp;<span className="key">"delivery_pincode"</span><span className="punc">:</span> <span className="str">"110034"</span><span className="punc">,</span><br/>
-              &nbsp;&nbsp;<span className="key">"weight_kg"</span><span className="punc">:</span> <span className="num">1.2</span><span className="punc">,</span><br/>
-              &nbsp;&nbsp;<span className="key">"dimensions_cm"</span><span className="punc">:</span> <span className="punc">[</span><span className="num">24</span><span className="punc">,</span> <span className="num">18</span><span className="punc">,</span> <span className="num">9</span><span className="punc">]</span><span className="punc">,</span><br/>
-              &nbsp;&nbsp;<span className="key">"payment_mode"</span><span className="punc">:</span> <span className="str">"COD"</span><span className="punc">,</span><br/>
-              &nbsp;&nbsp;<span className="key">"allocation"</span><span className="punc">:</span> <span className="str">"lowest_cost_at_sla"</span><br/>
-              <span className="punc">{'}'}</span><br/>
-              <div className="code-rule"></div>
-              <span className="cmt">200 OK</span><br/>
-              <span className="punc">{'{'}</span><br/>
-              &nbsp;&nbsp;<span className="key">"awb"</span><span className="punc">:</span> <span className="str">"DLV8842190037"</span><span className="punc">,</span><br/>
-              &nbsp;&nbsp;<span className="key">"courier"</span><span className="punc">:</span> <span className="str">"delhivery_surface"</span><span className="punc">,</span><br/>
-              &nbsp;&nbsp;<span className="key">"quoted_amount"</span><span className="punc">:</span> <span className="num">64.00</span><span className="punc">,</span><br/>
-              &nbsp;&nbsp;<span className="key">"weight_locked"</span><span className="punc">:</span> <span className="num">true</span><br/>
-              <span className="punc">{'}'}</span>
-            </div>
-          </div>
+          {/* API section removed as requested */}
         </div>
       </section>
 
@@ -916,54 +900,34 @@ export default function GatiVia() {
             <p>Courier rates are negotiated on your behalf and passed through at cost. The subscription buys allocation, reconciliation and the claims that pay for it.</p>
           </div>
 
-          <div className="plans">
-            <div className="plan">
-              <h3>Starter</h3>
-              <p className="who">For brands finding their footing, under 300 orders a month</p>
-              <div className="fig"><sup>₹</sup>0</div>
-              <p className="per">Free, permanently</p>
-              <ul>
-                <li><i className="fa-solid fa-check"></i><span>All 26 courier partners at standard rates</span></li>
-                <li><i className="fa-solid fa-check"></i><span>Two storefront integrations</span></li>
-                <li><i className="fa-solid fa-check"></i><span>Unified tracking and branded tracking page</span></li>
-                <li><i className="fa-solid fa-check"></i><span>Weight and dimension capture at packing</span></li>
-              </ul>
-              <a href="#" className="act act-quiet act-full">Create an account</a>
-            </div>
-
-            <div className="plan lead">
-              <h3>Growth</h3>
-              <p className="who">For teams where a missed dispute window costs real money</p>
-              <div className="fig"><sup>₹</sup>1,499</div>
-              <p className="per">Per month, billed monthly</p>
-              <ul>
-                <li><i className="fa-solid fa-check"></i><span>Everything in Starter, at discounted rates</span></li>
-                <li><i className="fa-solid fa-check"></i><span>Rule-based allocation across all partners</span></li>
-                <li><i className="fa-solid fa-check"></i><span>Automatic invoice reconciliation and claim filing</span></li>
-                <li><i className="fa-solid fa-check"></i><span>WhatsApp and IVR workflows for failed deliveries</span></li>
-                <li><i className="fa-solid fa-check"></i><span>Bring your own courier contracts</span></li>
-                <li><i className="fa-solid fa-check"></i><span>Full API access and webhooks</span></li>
-              </ul>
-              <a href="#" className="act act-solid act-full">Start a 14-day trial</a>
-            </div>
-
-            <div className="plan">
-              <h3>Enterprise</h3>
-              <p className="who">For multi-warehouse operations with their own carrier agreements</p>
-              <div className="fig">Custom</div>
-              <p className="per">Annual agreement</p>
-              <ul>
-                <li><i className="fa-solid fa-check"></i><span>Everything in Growth</span></li>
-                <li><i className="fa-solid fa-check"></i><span>Full AuditRax suite with ERP write-back</span></li>
-                <li><i className="fa-solid fa-check"></i><span>Multi-location routing and warehouse rules</span></li>
-                <li><i className="fa-solid fa-check"></i><span>Order-level profitability reporting</span></li>
-                <li><i className="fa-solid fa-check"></i><span>Named account manager and uptime SLA</span></li>
-              </ul>
-              <a href="#" className="act act-quiet act-full">Talk to sales</a>
+          <div className="plans" style={{ display: 'flex', justifyContent: 'center', marginTop: '32px' }}>
+            <div className="plan lead" style={{ 
+              maxWidth: '680px', 
+              width: '100%', 
+              textAlign: 'center', 
+              padding: '64px 48px',
+              borderRadius: '32px',
+              background: 'linear-gradient(145deg, #ffffff 0%, #f4f9f7 100%)',
+              boxShadow: '0 25px 50px -12px rgba(10, 79, 64, 0.15), 0 0 0 1px rgba(10, 79, 64, 0.05)',
+              border: 'none',
+              position: 'relative',
+              overflow: 'hidden'
+            }}>
+              <div style={{ position: 'absolute', top: '-60px', right: '-60px', width: '150px', height: '150px', background: 'rgba(10, 79, 64, 0.03)', borderRadius: '50%', filter: 'blur(20px)' }}></div>
+              <div style={{ position: 'absolute', bottom: '-40px', left: '-40px', width: '120px', height: '120px', background: 'rgba(10, 79, 64, 0.03)', borderRadius: '50%', filter: 'blur(20px)' }}></div>
+              
+              <div style={{ position: 'relative', zIndex: 2 }}>
+                <i className="fa-solid fa-headset" style={{ fontSize: '32px', color: '#0a4f40', marginBottom: '20px', filter: 'drop-shadow(0 4px 6px rgba(10,79,64,0.2))' }}></i>
+                <div className="fig" style={{ fontSize: '28px', marginBottom: '14px', letterSpacing: '-0.02em' }}>Custom Pricing for Your Scale</div>
+                <p className="who" style={{ maxWidth: '100%', margin: '0 auto 32px', fontSize: '15px', lineHeight: '1.65', color: '#5f7a72' }}>
+                  Whether you're shipping 300 or 300,000 orders a month, we build a pricing plan that guarantees ROI. Talk to our revenue experts to find out exactly how much capital you're leaving on the table.
+                </p>
+                <a href="#contact-sales" onClick={scrollToContact} className="act act-solid" style={{ padding: '16px 40px', fontSize: '15px', borderRadius: '14px', width: '100%', boxShadow: '0 8px 16px -4px rgba(10,79,64,0.25)' }}>
+                  Request a Call to Learn More
+                </a>
+              </div>
             </div>
           </div>
-
-          <p className="price-note">A brand shipping 3,000 orders a month typically recovers between ₹18,000 and ₹45,000 in weight and billing corrections. The Growth plan is designed to cost less than what it finds.</p>
         </div>
       </section>
 

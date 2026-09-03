@@ -557,9 +557,44 @@
 #gativia-console .cov-key{display:flex;align-items:center;gap:8px}
 #gativia-console .cov-key em{width:9px;height:9px;border-radius:50%;background:var(--forest);opacity:.82;display:inline-block;flex:0 0 auto}
 #gativia-console .cov-key.off em{background:#d3dbd8;opacity:1}
-#gativia-console .partners{display:flex;flex-wrap:wrap;gap:9px;margin-top:52px;padding-top:44px;border-top:1px solid var(--hair)}
-#gativia-console .partners span{font-size:14px;color:var(--body);background:#fff;padding:8px 15px;border-radius:7px;box-shadow:var(--shadow-soft)}
-#gativia-console .partners span.more{background:transparent;box-shadow:none;color:var(--muted);padding-left:6px}
+#gativia-console .partners-marquee-container {
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
+  margin-top: 52px;
+  padding-top: 44px;
+  border-top: 1px solid var(--hair);
+  mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+}
+
+#gativia-console .partners-marquee {
+  display: flex;
+  width: max-content;
+  gap: 24px;
+  animation: scrollMarquee 25s linear infinite;
+}
+
+#gativia-console .partners-marquee:hover {
+  animation-play-state: paused;
+}
+
+#gativia-console .partners-marquee span {
+  font-size: 14.5px;
+  color: var(--body);
+  background: #fff;
+  padding: 10px 20px;
+  border-radius: 8px;
+  box-shadow: var(--shadow-soft);
+  display: block;
+  font-weight: 500;
+  flex: 0 0 auto;
+}
+
+@keyframes scrollMarquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(calc(-50% - 12px)); } /* 50% shift plus half of one gap */
+}
 
 /* ============================================================
    INLINE SVG VISUALS
@@ -568,16 +603,20 @@
 #gativia-console .tline{width:100%;height:auto;display:block;margin-bottom:64px}
 #gativia-console .viz-cap{font-size:14px;color:var(--muted);margin:-38px 0 62px;max-width:64ch}
 
-@keyframes marchRight {
-  to { stroke-dashoffset: -16; }
+@keyframes driveTruck {
+  0% { transform: translateX(20px); opacity: 0; }
+  5% { opacity: 1; }
+  40% { transform: translateX(608px); } /* Hits 'Attempt failed' */
+  80% { transform: translateX(804px); } /* Crawls slowly to 'Buyer confirmed' */
+  95% { opacity: 1; }
+  100% { transform: translateX(1000px); opacity: 0; } /* Speeds up to 'Delivered' */
 }
 @keyframes pulseGlow {
   0% { opacity: 0.6; stroke-width: 2; }
   100% { opacity: 1; stroke-width: 4; }
 }
-#gativia-console .marching-line {
-  animation: marchRight 0.6s linear infinite;
-  opacity: 0.6;
+#gativia-console .traveling-truck {
+  animation: driveTruck 30s linear infinite;
 }
 #gativia-console .error-pulse {
   animation: pulseGlow 1s ease-in-out infinite alternate;
@@ -587,19 +626,39 @@
    RESPONSIVE — new modules
    ============================================================ */
 @media (max-width:1040px){
+  #gativia-console .hero-in{grid-template-columns:1fr;gap:50px}
+  #gativia-console .foot-in{grid-template-columns:repeat(2,1fr);gap:40px}
   #gativia-console .engine{grid-template-columns:1fr;gap:22px}
   #gativia-console .cov{grid-template-columns:1fr;gap:44px}
   #gativia-console .rate-top{align-items:flex-start}
   #gativia-console .int-grid{grid-template-columns:repeat(2,1fr)}
   #gativia-console .feat{grid-template-columns:repeat(2,1fr)}
-}
 @media (max-width:860px){
+  #gativia-console { --gutter: 20px; }
+  
+  /* Responsive Section Padding */
+  #gativia-console .hero { padding: 64px 0 72px; }
+  #gativia-console .band, #gativia-console .pricing, #gativia-console .vs-section { padding: 64px 0; }
+  #gativia-console .foot { padding: 64px 0 32px; }
+  
+  #gativia-console .navlinks{display:none}
   #gativia-console .rate-band{padding:72px 0}
   #gativia-console .form{padding:26px 24px}
   #gativia-console .dotgrid{grid-template-columns:repeat(25,1fr);gap:4px}
   #gativia-console .partners{margin-top:40px;padding-top:36px}
+  
+  /* Ledger Mobile Cards */
+  #gativia-console .led-row.head{display:none}
+  #gativia-console .led-row{grid-template-columns:1fr;gap:8px;padding:22px 0;border-bottom:1px solid var(--hair)}
+  #gativia-console .led-row>div{padding:0 22px;border:none;justify-content:space-between}
+  #gativia-console .led-row>div[data-l]::before{content:attr(data-l);font-size:12.5px;color:var(--muted);font-weight:500}
+  #gativia-console .led-id{font-size:16px;font-weight:600;margin-bottom:6px}
 }
 @media (max-width:560px){
+  #gativia-console .foot-in{grid-template-columns:1fr}
+  #gativia-console .hero-acts{flex-direction:column}
+  #gativia-console .hero-acts .act{width:100%}
+  #gativia-console .dims{grid-template-columns:1fr}
   #gativia-console .res-grid{grid-template-columns:1fr;gap:18px}
   #gativia-console .res-right{text-align:left;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
   #gativia-console .res-break{margin:0;order:2}
@@ -611,4 +670,6 @@
   #gativia-console .cov-stat b{font-size:32px}
   #gativia-console .int-grid{grid-template-columns:1fr}
   #gativia-console .feat{grid-template-columns:1fr}
+}
+
 }
