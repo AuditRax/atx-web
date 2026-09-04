@@ -357,7 +357,7 @@ export default function GatiVia() {
       {/* ===================== NAV ===================== */}
       <header className="topbar">
         <div className="topbar-in">
-          <a href="#" className="brand"><i className="fa-solid fa-cube"></i> GatiVia</a>
+          <a href="#" className="brand"><img src="/gativialogo.png" alt="GatiVia Logo" className="brand-logo" /></a>
           <nav className="navlinks">
             <a href="#rates">Rates</a>
             <a href="#ship">Ship</a>
@@ -471,7 +471,7 @@ export default function GatiVia() {
             
             <div className="vs-card after">
               <div className="vs-card-head">
-                <div className="vs-badge gativia"><i className="fa-solid fa-cube"></i> How it works on GatiVia</div>
+                <div className="vs-badge gativia"><img src="/gativialogo.png" alt="GatiVia" style={{ height: '16px', marginRight: '6px' }} /> How it works on GatiVia</div>
                 <h3>One platform, and a ledger that closes itself</h3>
               </div>
               <ol className="vs-list">

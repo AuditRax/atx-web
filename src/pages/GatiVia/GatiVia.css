@@ -86,6 +86,7 @@
 #gativia-console .brand{display:flex;align-items:center;gap:10px;font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:20px;color:var(--forest);letter-spacing:-.03em}
 #gativia-console .brand i{font-size:17px}
 #gativia-console .brand em{font-style:normal;color:var(--faint);font-weight:500}
+#gativia-console .brand-logo{height:112px;width:auto;display:block;object-fit:contain}
 #gativia-console .navlinks{display:flex;gap:32px;font-size:15px;color:var(--body)}
 #gativia-console .navlinks a{transition:color .18s ease}
 #gativia-console .navlinks a:hover{color:var(--forest)}
@@ -670,6 +671,7 @@
   #gativia-console .cov-stat b{font-size:32px}
   #gativia-console .int-grid{grid-template-columns:1fr}
   #gativia-console .feat{grid-template-columns:1fr}
+  #gativia-console .brand-logo{height:90px}
 }
 
 }
