@@ -23,7 +23,7 @@
   --shadow-soft:0 1px 2px rgba(17,24,39,.03), 0 12px 30px -16px rgba(17,24,39,.14);
   --shadow-lift:0 2px 6px rgba(17,24,39,.04), 0 28px 60px -28px rgba(10,79,64,.28);
 
-  --page:1180px;
+  --page:1440px;
   --gutter:40px;
 
   background:var(--paper);
@@ -409,21 +409,76 @@
    PRICING
    ============================================================ */
 #gativia-console .pricing{background:var(--mist);padding:104px 0}
-#gativia-console .price-head{max-width:56ch;margin-bottom:58px}
-#gativia-console .price-head h2{font-size:clamp(28px,3.6vw,40px);margin-bottom:16px;max-width:20ch}
-#gativia-console .price-head p{font-size:17.5px;color:var(--body);max-width:54ch}
-#gativia-console .plans{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:26px;align-items:start}
-#gativia-console .plan{background:transparent;border-radius:14px;padding:38px 32px}
-#gativia-console .plan.lead{background:#fff;box-shadow:var(--shadow-lift)}
-#gativia-console .plan h3{font-size:19px;margin-bottom:6px}
-#gativia-console .plan .who{font-size:14px;color:var(--muted);margin-bottom:26px;min-height:42px;max-width:26ch}
-#gativia-console .plan .fig{font-family:'Space Grotesk',sans-serif;font-size:40px;font-weight:600;color:var(--slate);letter-spacing:-.035em;line-height:1;margin-bottom:6px}
-#gativia-console .plan .fig sup{font-size:20px;font-weight:500;vertical-align:top;position:relative;top:6px;margin-right:1px}
-#gativia-console .plan .per{font-size:14px;color:var(--muted);margin-bottom:30px}
-#gativia-console .plan ul{list-style:none;margin-bottom:32px}
-#gativia-console .plan li{display:flex;gap:12px;padding:9px 0;font-size:14.5px;line-height:1.55}
-#gativia-console .plan li i{color:var(--forest);font-size:11px;margin-top:6px;flex:0 0 auto}
-#gativia-console .price-note{margin-top:38px;font-size:14.5px;color:var(--muted);max-width:64ch}
+#gativia-console .pricing-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+#gativia-console .price-head{max-width:56ch;margin-bottom:0}
+#gativia-console .price-head h2{font-size:clamp(32px,3.6vw,44px);margin-bottom:20px;max-width:20ch}
+#gativia-console .price-head p{font-size:18px;color:var(--body);max-width:54ch}
+#gativia-console .plans{display:block}
+#gativia-console .plan.lead{
+  background:linear-gradient(145deg, #ffffff 0%, #f4f9f7 100%);
+  border-radius:32px;
+  padding:54px 48px;
+  box-shadow:0 25px 50px -12px rgba(10, 79, 64, 0.15), 0 0 0 1px rgba(10, 79, 64, 0.05);
+  position:relative;
+  overflow:hidden;
+}
+#gativia-console .plan-glow{position:absolute;width:150px;height:150px;background:rgba(10, 79, 64, 0.03);border-radius:50%;filter:blur(20px)}
+#gativia-console .plan-glow.top-right{top:-60px;right:-60px}
+#gativia-console .plan-glow.bottom-left{bottom:-40px;left:-40px;width:120px;height:120px}
+#gativia-console .plan-content{position:relative;z-index:2}
+#gativia-console .plan-content i{font-size:32px;color:var(--forest);margin-bottom:20px;filter:drop-shadow(0 4px 6px rgba(10,79,64,0.2))}
+#gativia-console .plan .fig{font-family:'Space Grotesk',sans-serif;font-size:32px;font-weight:600;color:var(--slate);letter-spacing:-.02em;margin-bottom:14px}
+#gativia-console .plan .who{font-size:16px;color:#5f7a72;margin-bottom:32px;line-height:1.65}
+#gativia-console .plan-act{padding:16px 40px;font-size:15px;border-radius:14px;box-shadow:0 8px 16px -4px rgba(10,79,64,0.25)}
+
+/* ============================================================
+   SCROLL ANIMATIONS & BG PARTICLES
+   ============================================================ */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.scroll-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+#gativia-console {
+  position: relative;
+}
+.bg-particles {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+.particle {
+  position: absolute;
+  background: rgba(10, 79, 64, 0.03);
+  border: 1px solid rgba(10, 79, 64, 0.05);
+  border-radius: 4px;
+  animation: floatParticle 25s infinite linear;
+}
+.particle:nth-child(1) { width: 30px; height: 30px; top: 10%; left: 15%; animation-duration: 35s; }
+.particle:nth-child(2) { width: 45px; height: 45px; top: 40%; left: 80%; animation-duration: 40s; animation-direction: reverse; }
+.particle:nth-child(3) { width: 20px; height: 20px; top: 70%; left: 25%; animation-duration: 25s; }
+.particle:nth-child(4) { width: 60px; height: 60px; top: 20%; left: 65%; animation-duration: 45s; }
+.particle:nth-child(5) { width: 35px; height: 35px; top: 85%; left: 85%; animation-duration: 30s; animation-direction: reverse; }
+
+@keyframes floatParticle {
+  0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateY(-400px) rotate(360deg); opacity: 0; }
+}
+
+#gativia-console .shell, #gativia-console .topbar, #gativia-console .foot, #gativia-console .pricing {
+  position: relative;
+  z-index: 1;
+}
+
 
 /* ============================================================
    CLOSER
@@ -437,7 +492,7 @@
    FOOTER
    ============================================================ */
 #gativia-console .foot{background:var(--slate);color:#9aa5a1;padding:76px 0 34px}
-#gativia-console .foot-in{display:grid;grid-template-columns:1.7fr 1fr 1fr 1fr 1.2fr;gap:52px;padding-bottom:52px}
+#gativia-console .foot-in{display:grid;grid-template-columns:1.7fr 1fr 1fr 1.2fr;gap:52px;padding-bottom:52px}
 #gativia-console .foot-brand{display:flex;align-items:center;gap:10px;font-family:'Space Grotesk',sans-serif;font-size:20px;font-weight:600;color:#fff;letter-spacing:-.03em;margin-bottom:14px}
 #gativia-console .foot-blurb{font-size:14.5px;line-height:1.65;max-width:32ch;color:#8b9793}
 #gativia-console .foot-col h5{color:#fff;font-size:14.5px;margin-bottom:18px;font-weight:600}
@@ -456,7 +511,6 @@
 @media (max-width:860px){
   #gativia-console .rate-band{padding:72px 0}
   #gativia-console .form{padding:26px 24px}
-  #gativia-console .dotgrid{grid-template-columns:repeat(25,1fr);gap:4px}
   #gativia-console .partners{margin-top:40px;padding-top:36px}
 }
 @media (max-width:560px){
@@ -467,7 +521,6 @@
   #gativia-console .res-right .act{order:3;width:100%}
   #gativia-console .goal{width:100%}
   #gativia-console .goal button{flex:1 1 0;padding:10px 6px}
-  #gativia-console .dotgrid{grid-template-columns:repeat(20,1fr)}
   #gativia-console .cov-stat b{font-size:32px}
 }
 
@@ -551,13 +604,98 @@
 #gativia-console .cov-stats{display:grid;gap:30px}
 #gativia-console .cov-stat b{display:block;font-family:'Space Grotesk',sans-serif;font-size:38px;font-weight:600;color:var(--forest);letter-spacing:-.035em;line-height:1;margin-bottom:7px}
 #gativia-console .cov-stat span{font-size:14.5px;color:var(--body);display:block;max-width:30ch}
-#gativia-console .dotgrid{display:grid;grid-template-columns:repeat(40,1fr);gap:5px}
-#gativia-console .dotgrid i{display:block;aspect-ratio:1/1;border-radius:50%;background:var(--forest);opacity:.82}
-#gativia-console .dotgrid i.off{background:#d3dbd8;opacity:1}
 #gativia-console .cov-cap{margin-top:26px;font-size:14px;color:var(--muted);max-width:62ch;display:flex;gap:22px;flex-wrap:wrap}
-#gativia-console .cov-key{display:flex;align-items:center;gap:8px}
-#gativia-console .cov-key em{width:9px;height:9px;border-radius:50%;background:var(--forest);opacity:.82;display:inline-block;flex:0 0 auto}
-#gativia-console .cov-key.off em{background:#d3dbd8;opacity:1}
+
+#gativia-console .coverage-visual {
+  background: #fff;
+  border-radius: 20px;
+  padding: 44px;
+  box-shadow: var(--shadow-lift);
+  border: 1px solid var(--hair);
+  position: relative;
+  overflow: hidden;
+}
+
+#gativia-console .cov-bar-group {
+  margin-bottom: 32px;
+}
+#gativia-console .cov-bar-group:last-child {
+  margin-bottom: 0;
+}
+
+#gativia-console .cov-bar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 12px;
+  font-size: 15px;
+  color: var(--slate);
+  font-weight: 500;
+}
+
+#gativia-console .cov-bar-header span.val {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 22px;
+  color: var(--forest);
+  line-height: 1;
+}
+#gativia-console .cov-bar-header span.pct {
+  font-size: 14px;
+  color: var(--muted);
+  font-weight: 500;
+  margin-left: 6px;
+}
+
+#gativia-console .cov-bar-track {
+  width: 100%;
+  height: 14px;
+  background: var(--stone);
+  border-radius: 100px;
+  overflow: hidden;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.06);
+}
+
+@keyframes slideInBar {
+  0% { transform: scaleX(0); }
+  100% { transform: scaleX(1); }
+}
+
+#gativia-console .cov-bar-fill {
+  height: 100%;
+  border-radius: 100px;
+  transform-origin: left;
+  transform: scaleX(0);
+  animation: slideInBar 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+#gativia-console .cov-bar-fill.forward {
+  background: linear-gradient(90deg, #a7e0ce, var(--forest));
+}
+
+#gativia-console .cov-bar-fill.reverse {
+  background: linear-gradient(90deg, #d3dbd8, #a7e0ce);
+}
+
+#gativia-console .cov-insight {
+  margin-top: 36px;
+  padding-top: 24px;
+  border-top: 1px solid var(--hair);
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+#gativia-console .cov-insight i {
+  color: var(--forest);
+  font-size: 18px;
+  margin-top: 3px;
+}
+#gativia-console .cov-insight p {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--body);
+  margin: 0;
+}
 #gativia-console .partners-marquee-container {
   overflow: hidden;
   white-space: nowrap;
@@ -645,7 +783,6 @@
   #gativia-console .navlinks{display:none}
   #gativia-console .rate-band{padding:72px 0}
   #gativia-console .form{padding:26px 24px}
-  #gativia-console .dotgrid{grid-template-columns:repeat(25,1fr);gap:4px}
   #gativia-console .partners{margin-top:40px;padding-top:36px}
   
   /* Ledger Mobile Cards */
@@ -667,7 +804,6 @@
   #gativia-console .res-right .act{order:3;width:100%}
   #gativia-console .goal{width:100%}
   #gativia-console .goal button{flex:1 1 0;padding:10px 6px}
-  #gativia-console .dotgrid{grid-template-columns:repeat(20,1fr)}
   #gativia-console .cov-stat b{font-size:32px}
   #gativia-console .int-grid{grid-template-columns:1fr}
   #gativia-console .feat{grid-template-columns:1fr}

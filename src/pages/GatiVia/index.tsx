@@ -103,18 +103,19 @@ export default function GatiVia() {
 
   useEffect(() => {
     /* ---------------------------------------------------------
-       Coverage grid — 1,000 dots, each roughly 25 pincodes.
-       24,189 of 25,178 support reverse pickup, so ~39 read faint.
+       Scroll Animations
        --------------------------------------------------------- */
-    var grid = document.getElementById('dotgrid');
-    if (grid) {
-      var TOTAL = 1000, GAPS = 39, seed = 20260903, off: Record<number, number> = {}, n = 0;
-      function rnd(){ seed = (seed * 1103515245 + 12345) % 2147483648; return seed / 2147483648; }
-      while (n < GAPS) { var k = Math.floor(rnd() * TOTAL); if (!off[k]) { off[k] = 1; n++; } }
-      var dots = '';
-      for (var i = 0; i < TOTAL; i++) dots += off[i] ? '<i class="off"></i>' : '<i></i>';
-      grid.innerHTML = dots;
-    }
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+    const timer = setTimeout(() => {
+      document.querySelectorAll('.scroll-reveal').forEach((el) => observer.observe(el));
+    }, 100);
 
     /* ---------------------------------------------------------
        Rate and slab engine
@@ -354,6 +355,13 @@ export default function GatiVia() {
   return (
     <>
       <div id="gativia-console">
+        <div className="bg-particles">
+          <div className="particle"></div>
+          <div className="particle"></div>
+          <div className="particle"></div>
+          <div className="particle"></div>
+          <div className="particle"></div>
+        </div>
       {/* ===================== NAV ===================== */}
       <header className="topbar">
         <div className="topbar-in">
@@ -362,7 +370,7 @@ export default function GatiVia() {
             <a href="#rates">Rates</a>
             <a href="#ship">Ship</a>
             <a href="#track">Track</a>
-            <a href="#reconcile">Reconcile</a>
+            <a href="#integrate">Integrations</a>
             <a href="#pricing">Pricing</a>
           </nav>
           <div className="navside">
@@ -374,14 +382,14 @@ export default function GatiVia() {
       </header>
 
       {/* ===================== HERO ===================== */}
-      <section className="hero">
+      <section className="hero scroll-reveal">
         <div className="shell hero-in">
           <div>
             <h1>The intelligent aggregation platform for modern logistics.</h1>
             <p className="hero-sub">Book across 26 courier partners from one screen, then watch every shipment reconcile itself against what you were quoted, charged and actually paid.</p>
             <div className="hero-acts">
               <a href="#" className="act act-solid">Start shipping free</a>
-              <a href="#reconcile" className="act act-quiet">See how reconciliation works</a>
+              <a href="#integrate" className="act act-quiet">Explore integrations</a>
             </div>
             <p className="hero-foot">No card required. Bring your own courier contracts on any plan.</p>
           </div>
@@ -487,7 +495,7 @@ export default function GatiVia() {
       </section>
 
       {/* ===================== RATE ENGINE ===================== */}
-      <section className="rate-band" id="rates">
+      <section className="rate-band scroll-reveal" id="rates">
         <div className="shell">
           <div className="rate-top">
             <div className="sec-head">
@@ -571,7 +579,7 @@ export default function GatiVia() {
       </section>
 
       {/* ===================== SHIP ===================== */}
-      <section className="band" id="ship">
+      <section className="band scroll-reveal" id="ship">
         <div className="shell">
           <div className="sec-head">
             <h2>Get it out the door on the right courier</h2>
@@ -643,12 +651,32 @@ export default function GatiVia() {
               </div>
             </div>
             <div>
-              <div className="dotgrid" id="dotgrid" role="img" aria-label="Coverage grid: roughly 96 percent of serviceable pincodes also support reverse pickup"></div>
-              <div className="cov-cap">
-                <span className="cov-key"><em></em> Forward and reverse</span>
-                <span className="cov-key off"><em></em> Forward only, no reverse pickup yet</span>
+              <div className="coverage-visual">
+                <div className="cov-bar-group">
+                  <div className="cov-bar-header">
+                    <span>Forward Delivery Pincodes</span>
+                    <span className="val">25,178</span>
+                  </div>
+                  <div className="cov-bar-track">
+                    <div className="cov-bar-fill forward" style={{ width: '100%' }}></div>
+                  </div>
+                </div>
+
+                <div className="cov-bar-group">
+                  <div className="cov-bar-header">
+                    <span>Reverse Pickup Supported</span>
+                    <span className="val">24,189 <span className="pct">(96%)</span></span>
+                  </div>
+                  <div className="cov-bar-track">
+                    <div className="cov-bar-fill reverse" style={{ width: '96.07%', animationDelay: '0.15s' }}></div>
+                  </div>
+                </div>
+                
+                <div className="cov-insight">
+                  <i className="fa-solid fa-circle-info"></i>
+                  <p>The platform knows which is which before you confirm an order, so a return-eligible product is never sold into a pincode we cannot collect from.</p>
+                </div>
               </div>
-              <p className="cov-cap" style={{display: 'block'}}>Each dot stands for about 25 pincodes. The platform knows which is which before you confirm an order, so a return-eligible product is never sold into a pincode we cannot collect from.</p>
             </div>
           </div>
 
@@ -666,7 +694,7 @@ export default function GatiVia() {
       </section>
 
       {/* ===================== TRACK ===================== */}
-      <section className="band" id="track">
+      <section className="band scroll-reveal" id="track">
         <div className="shell">
           <div className="sec-head">
             <h2>Then keep it moving, and keep the cash flowing</h2>
@@ -761,100 +789,12 @@ export default function GatiVia() {
         </div>
       </section>
 
-      {/* ===================== RECONCILE ===================== */}
-      <section className="ledger-band" id="reconcile">
+      {/* ===================== INTEGRATE + API ===================== */}
+      <section className="ledger-band scroll-reveal" id="integrate">
         <div className="shell">
           <div className="ledger-head">
-            <h2>Every shipment carries its own money trail</h2>
-            <p>Most platforms hand your invoice to a separate tool weeks later, which then audits data it never captured. AuditRax reads the booking and the invoice from the same ledger, so a variance has an answer attached before anyone asks.</p>
-          </div>
-
-          <svg className="pipe" viewBox="0 0 1020 122" role="img" aria-label="A pipeline in five stages: order created, rate locked, weight sealed at packing, invoice parsed on arrival, then settled or claimed.">
-            <line x1="20" y1="34" x2="1000" y2="34" stroke="rgba(255,255,255,.22)" strokeWidth="2" />
-            <g fontFamily="Inter, sans-serif">
-              <circle cx="20" cy="34" r="7" fill="#0a4f40" stroke="#ffffff" strokeWidth="2" />
-              <text x="20" y="68" fontSize="14.5" fontWeight="500" fill="#ffffff">Order created</text>
-              <text x="20" y="88" fontSize="12.5" fill="#b8d9cc">Address, value and contents</text>
-
-              <circle cx="265" cy="34" r="7" fill="#0a4f40" stroke="#ffffff" strokeWidth="2" />
-              <text x="265" y="68" fontSize="14.5" fontWeight="500" fill="#ffffff" textAnchor="middle">Rate locked</text>
-              <text x="265" y="88" fontSize="12.5" fill="#b8d9cc" textAnchor="middle">The quote is recorded, not estimated</text>
-
-              <circle cx="510" cy="34" r="7" fill="#0a4f40" stroke="#ffffff" strokeWidth="2" />
-              <text x="510" y="68" fontSize="14.5" fontWeight="500" fill="#ffffff" textAnchor="middle">Weight sealed</text>
-              <text x="510" y="88" fontSize="12.5" fill="#b8d9cc" textAnchor="middle">Dimensions and photo at packing</text>
-
-              <circle cx="755" cy="34" r="7" fill="#0a4f40" stroke="#ffffff" strokeWidth="2" />
-              <text x="755" y="68" fontSize="14.5" fontWeight="500" fill="#ffffff" textAnchor="middle">Invoice parsed</text>
-              <text x="755" y="88" fontSize="12.5" fill="#b8d9cc" textAnchor="middle">Each line matched to its booking</text>
-
-              <circle cx="1000" cy="34" r="9" fill="#a7e0ce" />
-              <text x="1000" y="68" fontSize="14.5" fontWeight="600" fill="#a7e0ce" textAnchor="end">Settled or claimed</text>
-              <text x="1000" y="88" fontSize="12.5" fill="#b8d9cc" textAnchor="end">Every variance has an owner</text>
-            </g>
-          </svg>
-
-          <div className="ledger">
-            <div className="led-row head">
-              <div>Shipment</div><div>Quoted</div><div>Charged</div><div>Variance</div><div>Status</div>
-            </div>
-            <div className="led-row">
-              <div className="led-id">ORD-48213</div>
-              <div className="led-num" data-l="Quoted">₹64.00</div>
-              <div className="led-num" data-l="Charged">₹64.00</div>
-              <div className="led-num" data-l="Variance">₹0.00</div>
-              <div className="led-ok" data-l="Status"><i className="fa-solid fa-circle-check"></i> Matched</div>
-            </div>
-            <div className="led-row led-gap">
-              <div className="led-id">ORD-48209</div>
-              <div className="led-num" data-l="Quoted">₹58.00</div>
-              <div className="led-num" data-l="Charged">₹91.00</div>
-              <div className="led-num" data-l="Variance">+₹33.00</div>
-              <div className="led-warn" data-l="Status"><i className="fa-solid fa-triangle-exclamation"></i> Weight claim filed</div>
-            </div>
-            <div className="led-row">
-              <div className="led-id">ORD-48204</div>
-              <div className="led-num" data-l="Quoted">₹72.00</div>
-              <div className="led-num" data-l="Charged">₹72.00</div>
-              <div className="led-num" data-l="Variance">₹0.00</div>
-              <div className="led-ok" data-l="Status"><i className="fa-solid fa-circle-check"></i> Matched</div>
-            </div>
-            <div className="led-row">
-              <div className="led-id">ORD-48198</div>
-              <div className="led-num" data-l="Quoted">₹64.00</div>
-              <div className="led-num" data-l="Charged">₹64.00</div>
-              <div className="led-num" data-l="Variance">−₹64.00</div>
-              <div className="led-ok" data-l="Status"><i className="fa-solid fa-circle-check"></i> Credited back</div>
-            </div>
-            <div className="led-foot">
-              <span>4 of 1,842 shipments shown for October</span>
-              <span><b>₹41,280</b> recovered · <b>96%</b> of invoice lines matched automatically</span>
-            </div>
-          </div>
-
-          <div className="ledger-notes">
-            <div>
-              <h4>Invoices read on arrival</h4>
-              <p>Each courier invoice is parsed line by line and matched to the booking that created it. Nothing waits for month-end.</p>
-            </div>
-            <div>
-              <h4>Claims filed inside the window</h4>
-              <p>Dispute windows run seven to fourteen days. Claims go out with the packing evidence attached, before the window closes.</p>
-            </div>
-            <div>
-              <h4>Profit per order, not per parcel</h4>
-              <p>Freight, COD fee, RTO cost and the reverse leg land against the original order, so margin is a fact rather than an estimate.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ===================== INTEGRATE + API ===================== */}
-      <section className="band" id="integrate">
-        <div className="shell">
-          <div className="sec-head">
             <h2>Connects to what you already run</h2>
-            <p>Native syncs for the stack most Indian D2C teams are on, and a plain REST API for everything else.</p>
+            <p>Native syncs for the stack most Indian D2C teams are on.</p>
           </div>
 
           <div className="int-grid">
@@ -884,7 +824,7 @@ export default function GatiVia() {
                 <i className="fa-solid fa-code"></i>
                 <h3>Developers</h3>
               </div>
-              <p>REST API, signed webhooks and a full sandbox</p>
+              <p>Custom integrations, real-time events and a secure testing environment</p>
             </div>
           </div>
 
@@ -893,38 +833,29 @@ export default function GatiVia() {
       </section>
 
       {/* ===================== PRICING ===================== */}
-      <section className="pricing" id="pricing">
+      <section className="pricing scroll-reveal" id="pricing">
         <div className="shell">
-          <div className="price-head">
-            <h2>Pay for the software, not for the postage</h2>
-            <p>Courier rates are negotiated on your behalf and passed through at cost. The subscription buys allocation, reconciliation and the claims that pay for it.</p>
-          </div>
+          <div className="pricing-grid">
+            <div className="price-head">
+              <h2>Pay for the software, not for the postage</h2>
+              <p>Courier rates are negotiated on your behalf and passed through at cost. The subscription buys allocation, reconciliation and the claims that pay for it.</p>
+            </div>
 
-          <div className="plans" style={{ display: 'flex', justifyContent: 'center', marginTop: '32px' }}>
-            <div className="plan lead" style={{ 
-              maxWidth: '680px', 
-              width: '100%', 
-              textAlign: 'center', 
-              padding: '64px 48px',
-              borderRadius: '32px',
-              background: 'linear-gradient(145deg, #ffffff 0%, #f4f9f7 100%)',
-              boxShadow: '0 25px 50px -12px rgba(10, 79, 64, 0.15), 0 0 0 1px rgba(10, 79, 64, 0.05)',
-              border: 'none',
-              position: 'relative',
-              overflow: 'hidden'
-            }}>
-              <div style={{ position: 'absolute', top: '-60px', right: '-60px', width: '150px', height: '150px', background: 'rgba(10, 79, 64, 0.03)', borderRadius: '50%', filter: 'blur(20px)' }}></div>
-              <div style={{ position: 'absolute', bottom: '-40px', left: '-40px', width: '120px', height: '120px', background: 'rgba(10, 79, 64, 0.03)', borderRadius: '50%', filter: 'blur(20px)' }}></div>
-              
-              <div style={{ position: 'relative', zIndex: 2 }}>
-                <i className="fa-solid fa-headset" style={{ fontSize: '32px', color: '#0a4f40', marginBottom: '20px', filter: 'drop-shadow(0 4px 6px rgba(10,79,64,0.2))' }}></i>
-                <div className="fig" style={{ fontSize: '28px', marginBottom: '14px', letterSpacing: '-0.02em' }}>Custom Pricing for Your Scale</div>
-                <p className="who" style={{ maxWidth: '100%', margin: '0 auto 32px', fontSize: '15px', lineHeight: '1.65', color: '#5f7a72' }}>
-                  Whether you're shipping 300 or 300,000 orders a month, we build a pricing plan that guarantees ROI. Talk to our revenue experts to find out exactly how much capital you're leaving on the table.
-                </p>
-                <a href="#contact-sales" onClick={scrollToContact} className="act act-solid" style={{ padding: '16px 40px', fontSize: '15px', borderRadius: '14px', width: '100%', boxShadow: '0 8px 16px -4px rgba(10,79,64,0.25)' }}>
-                  Request a Call to Learn More
-                </a>
+            <div className="plans">
+              <div className="plan lead">
+                <div className="plan-glow top-right"></div>
+                <div className="plan-glow bottom-left"></div>
+                
+                <div className="plan-content">
+                  <i className="fa-solid fa-headset"></i>
+                  <div className="fig">Custom Pricing for Your Scale</div>
+                  <p className="who">
+                    Whether you're shipping 300 or 300,000 orders a month, we build a pricing plan that guarantees ROI. Talk to our revenue experts to find out exactly how much capital you're leaving on the table.
+                  </p>
+                  <a href="#contact-sales" onClick={scrollToContact} className="act act-solid plan-act">
+                    Request a Call to Learn More
+                  </a>
+                </div>
               </div>
             </div>
           </div>
@@ -1089,13 +1020,6 @@ export default function GatiVia() {
               <a href="#reconcile">Reconcile with AuditRax</a>
               <a href="#integrate">Integrations</a>
               <a href="#pricing">Pricing</a>
-            </div>
-            <div className="foot-col">
-              <h5>Developers</h5>
-              <a href="#">API reference</a>
-              <a href="#">Webhooks</a>
-              <a href="#">Sandbox</a>
-              <a href="#">Status</a>
             </div>
             <div className="foot-col">
               <h5>Company</h5>
